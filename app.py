@@ -6,22 +6,15 @@ from groq import Groq
 from PIL import Image
 
 app = Flask(__name__)
-
-# Folder Setup
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+if os.environ.get('RENDER'):
+    app.config['UPLOAD_FOLDER'] = '/tmp/uploads'
+else:
+    app.config['UPLOAD_FOLDER'] = os.path.join(BASE_DIR, 'uploads')
 
-import os
-import base64
-import markdown
-from flask import Flask, render_template, request
-from groq import Groq
-from PIL import Image
-
-app = Flask(__name__)
+# Ensure the folder actually exists
+if not os.path.exists(app.config['UPLOAD_FOLDER']):
+    os.makedirs(app.config['UPLOAD_FOLDER'])
 
 # CONFIGURATION
 # This pulls the key from Render's 'Environment' tab
