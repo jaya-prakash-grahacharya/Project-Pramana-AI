@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pramāna | Digital Forensics</title>
+    <style>
+        :root { --primary: #0ea5e9; --bg: #020617; --card: #0f172a; --text-muted: #94a3b8; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: 50px auto; text-align: center; }
+        
+        h1 { font-size: 4rem; margin-bottom: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .subtitle { color: var(--text-muted); margin-bottom: 50px; font-size: 1.1rem; letter-spacing: 1px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .card { background: var(--card); border: 1px solid #1e293b; padding: 40px; border-radius: 24px; transition: 0.4s; display: flex; flex-direction: column; align-items: center; }
+        .card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        
+        /* Fixed Spacing: Added margin-bottom to separate from button */
+        input[type="file"] { margin-bottom: 35px; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; border: 1px dashed #334155; padding: 10px; border-radius: 8px; width: 100%; }
+        textarea { width: 100%; background: #020617; border: 1px solid #334155; color: white; padding: 15px; border-radius: 12px; margin-bottom: 35px; resize: none; }
+        
+        .btn { background: var(--primary); color: white; border: none; padding: 16px; width: 100%; border-radius: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
+        .btn:hover { background: #0284c7; box-shadow: 0 0 20px rgba(14, 165, 233, 0.4); }
+
+        .team-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 40px; }
+        .team-card { background: rgba(15, 23, 42, 0.8); padding: 30px; border-radius: 20px; width: 240px; border: 1px solid #1e293b; transition: 0.3s; }
+        .member-icon { width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; color: #020617;}
+        .member-icon img{ width: 60px; height: 60px; border-radius: 50%; object-fit: cover; object-position: top;}
+        .member-icon img:hover{width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: top;}
+
+        #scan-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,6,23,0.98); z-index:9999; display:none; flex-direction:column; align-items:center; justify-content:center; font-family: monospace; color: #38bdf8; }
+        .scan-line { position: absolute; width:100%; height:2px; background:#38bdf8; animation: scanAnim 3s linear infinite; }
+        @keyframes scanAnim { from {top:0} to {top:100%} }
+        #terminal { width: 80%; max-width: 600px; height: 250px; background: #000; padding: 25px; border: 1px solid #38bdf8; border-radius: 10px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <div id="scan-overlay">
+        <div class="scan-line"></div>
+        <div id="terminal"></div>
+        <p style="margin-top: 30px; letter-spacing: 4px;">SECURE ANALYTICS IN PROGRESS...</p>
+    </div>
+
+    <div class="container">
+        <h1>Pramāna</h1>
+        <p class="subtitle">ADVANCED FORENSIC TRUTH VERIFICATION ENGINE</p>
+
+        <div class="grid">
+            <div class="card">
+                <h3>📷 Image Forensics</h3>
+                <form action="/analyze" method="post" enctype="multipart/form-data" onsubmit="startScan()" style="width: 100%;">
+                    <input type="hidden" name="option" value="1"><input type="file" name="file" required>
+                    <button class="btn">Analyze Image</button>
+                </form>
+            </div>
+            <div class="card">
+                <h3>📰 News Validator</h3>
+                <form action="/analyze" method="post" onsubmit="startScan()" style="width: 100%;">
+                    <input type="hidden" name="option" value="2"><textarea name="news_text" rows="3" required placeholder="Paste news..."></textarea>
+                    <button class="btn">Verify Facts</button>
+                </form>
+            </div>
+            <div class="card">
+                <h3>🛡️ Scam Job Check</h3>
+                <form action="/analyze" method="post" enctype="multipart/form-data" onsubmit="startScan()" style="width: 100%;">
+                    <input type="hidden" name="option" value="3"><input type="file" name="file" required>
+                    <button class="btn">Check Scam</button>
+                </form>
+            </div>
+        </div>
+
+        <h2 style="color: var(--primary); margin-top: 80px;">Research & Development Team</h2>
+        <div class="team-grid">
+            <div class="team-card"><div class="member-icon"><img src="{{ url_for('static', filename='Jaya.jpg') }}" alt=""></div><h4>Jaya Prakash Grahacharya</h4><p>Lead Developer</p></div>
+            <div class="team-card"><div class="member-icon"><img src="{{ url_for('static', filename='Meghana.png') }}" alt=""></div><h4>Meghana Sahoo</h4><p>Project Coordinator</p></div>
+            <div class="team-card"><div class="member-icon"><img src="{{ url_for('static', filename='Scifi.jpeg') }}" alt=""></div><h4>Diptirekha Behera</h4><p>Project Associate</p></div>
+            <div class="team-card"><div class="member-icon"><img src="{{ url_for('static', filename='Thriller.jpeg') }}" alt=""></div><h4>Team Member 3</h4><p>Project Associate</p></div>
+            <div class="team-card"><div class="member-icon"><img src="{{ url_for('static', filename='Scifi.jpeg') }}" alt=""></div><h4>Team Member 3</h4><p>Project Associate</p></div>
+        </div>
+    </div>
+
+    <script>
+        function startScan() {
+            document.getElementById('scan-overlay').style.display = 'flex';
+            const term = document.getElementById('terminal');
+            const msgs = ["> ACCESSING CORE...", "> SCANNING PIXEL NOISE...", "> EXIF: EMPTY", "> PATTERN: AI DETECTED."];
+            let i = 0;
+            const timer = setInterval(() => { 
+                if(i < msgs.length) { term.innerHTML += `<div>${msgs[i++]}</div>`; } else { clearInterval(timer); }
+            }, 700);
+        }
+    </script>
+</body>
+</html>

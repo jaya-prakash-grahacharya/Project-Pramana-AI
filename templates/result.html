@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pramāna | Forensic Report</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; padding: 50px; color: #1e293b; }
+        .report-card { max-width: 900px; margin: auto; background: white; padding: 60px; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); border-top: 10px solid #0ea5e9; position: relative; }
+        .watermark { position: absolute; bottom: 30px; right: 40px; text-align: right; color: #cbd5e1; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+    <div class="report-card">
+        <h1 style="color:#0ea5e9">Forensic Analysis Report</h1>
+        <p style="color:#64748b">ID: PR-{{ range(100000, 999999) | random }}</p>
+        <div style="line-height: 1.8; margin-top: 30px;">
+            {{ result | safe }}
+        </div>
+        <div style="margin-top: 50px; text-align: center;">
+            <a href="/" style="text-decoration:none; color:#0ea5e9; border:1px solid #0ea5e9; padding:12px 25px; border-radius:8px; font-weight:bold;">NEW SCAN</a>
+            <button onclick="window.print()" style="margin-left:15px; padding:12px 25px; background:#0ea5e9; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">PDF REPORT</button>
+        </div>
+        <div class="watermark">
+            <p>Verified by <strong>Jaya Prakash & Team</strong></p>
+        </div>
+    </div>
+</body>
+</html>
