@@ -14,7 +14,25 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+import os
+import base64
+import markdown
+from flask import Flask, render_template, request
+from groq import Groq
+from PIL import Image
+
+app = Flask(__name__)
+
+# CONFIGURATION
+# This pulls the key from Render's 'Environment' tab
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
+
+# DEBUG CHECK: If the key is missing, this will show in your Render Logs
+if not GROQ_API_KEY:
+    print("CRITICAL ERROR: GROQ_API_KEY is not set in Environment Variables!")
+else:
+    print(f"API Key detected: {GROQ_API_KEY[:5]}***") # Shows only first 5 chars for safety
+
 client = Groq(api_key=GROQ_API_KEY)
 
 # 2026 Forensic Models
