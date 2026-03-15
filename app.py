@@ -14,8 +14,7 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# API Configuration
-GROQ_API_KEY = "os.environ.get('GROQ_API_KEY')"
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
 client = Groq(api_key=GROQ_API_KEY)
 
 # 2026 Forensic Models
