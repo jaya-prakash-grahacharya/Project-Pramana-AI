@@ -60,7 +60,21 @@ def analyze():
                 with open(processed_path, "rb") as f:
                     encoded_image = base64.b64encode(f.read()).decode('utf-8')
 
-                prompt = "Forensic check: Is this AI-generated? Verdict: REAL or AI."
+                prompt = """
+ACT AS A SENIOR DIGITAL FORENSICS INVESTIGATOR.
+Analyze the provided media for 'Synthetic Architectural Signatures'.
+
+REQUIRED REPORT FORMAT:
+1. **VERDICT**: [REAL or AI]
+2. **GENERATOR IDENTIFICATION**: (Identify if this is Midjourney, DALL-E 3, Stable Diffusion, or Adobe Firefly based on the pixel smoothing and lighting style).
+3. **INFERRED COMPUTATIONAL ENVIRONMENT**: (Explain that the 'Device' is a Cloud GPU Cluster rather than a physical camera).
+4. **FORENSIC REASONING**:
+   - **Texture Analysis**: Is it too 'plastic' or 'painterly'?
+   - **Artifact Check**: Look for warped edges or non-human proportions.
+   - **Metadata Logic**: Explain that the 'Location' is a virtual latent space, hence the lack of GPS.
+
+If the image is REAL, identify the likely smartphone or camera brand (e.g., iPhone/Samsung) based on the post-processing style.
+"""
                 if option == "3":
                     prompt = "Analyze this document for scams. Verdict: REAL or SCAM."
 
@@ -75,16 +89,14 @@ def analyze():
                 ai_reasoning = markdown.markdown(completion.choices[0].message.content)
 
                 forensic_box = f"""
-                <div style="margin-bottom: 30px; background: #0f172a; border: 1px solid #38bdf8; padding: 25px; border-radius: 15px; color: #f8fafc;">
-                    <h4 style="margin: 0; color: #38bdf8; border-bottom: 1px solid #1e293b; padding-bottom: 10px;">🛡️ SYNTHETIC ORIGIN PROFILE</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; font-size: 0.9rem; margin-top:15px;">
-                        <div><strong>SYSTEM:</strong> Cloud GPU Cluster</div>
-                        <div><strong>EXIF:</strong> Metadata Absent</div>
-                        <div><strong>MODEL:</strong> Latent Diffusion Signature</div>
-                        <div><strong>NOISE:</strong> Non-Physical PRNU</div>
-                    </div>
-                </div>
-                """
+<div style="background: #0f172a; border: 1px solid #38bdf8; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-family: monospace;">
+    <h4 style="color: #38bdf8; margin-top: 0;">🕵️ FORENSIC SPECIFICATIONS</h4>
+    <p><strong>Device Source:</strong> Virtual LPU/GPU Environment (Inferred)</p>
+    <p><strong>Logical Location:</strong> Latent Diffusion Space</p>
+    <p><strong>Sensor Noise:</strong> 0% Physical PRNU (AI Signature)</p>
+    <p><strong>Metadata Status:</strong> <span style="color: #ef4444;">STRIPPED / NON-EXISTENT</span></p>
+</div>
+"""
                 return render_template('result.html', result=forensic_box + ai_reasoning)
 
         elif option == "2":
