@@ -76,7 +76,7 @@ def analyze():
                 If the image is REAL, identify the likely smartphone or camera brand (e.g., iPhone/Samsung) based on the post-processing style.
                 """
                 if option == "3":
-                    prompt = "Analyze this job offer letter for authenticity. Check for signs of scams such as: 
+                    prompt = '''Analyze this job offer letter for authenticity. Check for signs of scams such as: 
                                 - requests for money or fees,
                                 - suspicious email domains,
                                 - poor grammar or formatting,
@@ -84,7 +84,7 @@ def analyze():
                                 - unrealistic salary or benefits,
                                 - lack of official contact information.
                                 
-                                Verdict required: REAL or SCAM."
+                                Verdict required: REAL or SCAM.'''
 
                 completion = client.chat.completions.create(
                     model=VISION_MODEL,
