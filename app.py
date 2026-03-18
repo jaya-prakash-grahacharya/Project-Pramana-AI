@@ -61,22 +61,30 @@ def analyze():
                     encoded_image = base64.b64encode(f.read()).decode('utf-8')
 
                 prompt = """
-ACT AS A SENIOR DIGITAL FORENSICS INVESTIGATOR.
-Analyze the provided media for 'Synthetic Architectural Signatures'.
-
-REQUIRED REPORT FORMAT:
-1. **VERDICT**: [REAL or AI]
-2. **GENERATOR IDENTIFICATION**: (Identify if this is Midjourney, DALL-E 3, Stable Diffusion, or Adobe Firefly based on the pixel smoothing and lighting style).
-3. **INFERRED COMPUTATIONAL ENVIRONMENT**: (Explain that the 'Device' is a Cloud GPU Cluster rather than a physical camera).
-4. **FORENSIC REASONING**:
-   - **Texture Analysis**: Is it too 'plastic' or 'painterly'?
-   - **Artifact Check**: Look for warped edges or non-human proportions.
-   - **Metadata Logic**: Explain that the 'Location' is a virtual latent space, hence the lack of GPS.
-
-If the image is REAL, identify the likely smartphone or camera brand (e.g., iPhone/Samsung) based on the post-processing style.
-"""
+                ACT AS A SENIOR DIGITAL FORENSICS INVESTIGATOR.
+                Analyze the provided media for 'Synthetic Architectural Signatures'.
+                
+                REQUIRED REPORT FORMAT:
+                1. **VERDICT**: [REAL or AI]
+                2. **GENERATOR IDENTIFICATION**: (Identify if this is Midjourney, DALL-E 3, Stable Diffusion, or Adobe Firefly based on the pixel smoothing and lighting style).
+                3. **INFERRED COMPUTATIONAL ENVIRONMENT**: (Explain that the 'Device' is a Cloud GPU Cluster rather than a physical camera).
+                4. **FORENSIC REASONING**:
+                   - **Texture Analysis**: Is it too 'plastic' or 'painterly'?
+                   - **Artifact Check**: Look for warped edges or non-human proportions.
+                   - **Metadata Logic**: Explain that the 'Location' is a virtual latent space, hence the lack of GPS.
+                
+                If the image is REAL, identify the likely smartphone or camera brand (e.g., iPhone/Samsung) based on the post-processing style.
+                """
                 if option == "3":
-                    prompt = "Analyze this document for scams. Verdict: REAL or SCAM."
+                    prompt = "Analyze this job offer letter for authenticity. Check for signs of scams such as: 
+                                - requests for money or fees,
+                                - suspicious email domains,
+                                - poor grammar or formatting,
+                                - unverifiable company details,
+                                - unrealistic salary or benefits,
+                                - lack of official contact information.
+                                
+                                Verdict required: REAL or SCAM."
 
                 completion = client.chat.completions.create(
                     model=VISION_MODEL,
