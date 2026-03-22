@@ -88,23 +88,11 @@ def analyze():
 
                 completion = client.chat.completions.create(
     model=VISION_MODEL,
-    messages=[
-        {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": prompt},
-                {
-                    "type": "image_url",
-                    "image_url": {
-                        "url": f"data:image/jpeg;base64,{encoded_image}",
-                    },
-                },
-            ],
-        }
-    ],
+    messages=[...],
     temperature=0.0,
     top_p=1,
-    max_tokens=500
+    max_tokens=250,
+    stream=False         
 )
                 
                 ai_reasoning = markdown.markdown(completion.choices[0].message.content)
