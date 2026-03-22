@@ -87,12 +87,25 @@ def analyze():
                                 Verdict required: REAL or SCAM.'''
 
                 completion = client.chat.completions.create(
-                    model=VISION_MODEL,
-                    messages=[{"role": "user", "content": [
-                        {"type": "text", "text": prompt},
-                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{encoded_image}"}}
-                    ]}]
-                )
+    model=VISION_MODEL,
+    messages=[
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:image/jpeg;base64,{encoded_image}",
+                    },
+                },
+            ],
+        }
+    ],
+    temperature=0.0,
+    top_p=1,
+    max_tokens=500
+)
                 
                 ai_reasoning = markdown.markdown(completion.choices[0].message.content)
 
