@@ -18,7 +18,6 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# -------------------------------------
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -50,7 +49,6 @@ def analyze():
         if option in ["1", "3"]:
             file = request.files.get('file')
             if file and file.filename != '':
-                # SECURE PATH JOINING
                 filename = file.filename
                 path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(path)
@@ -110,14 +108,14 @@ def analyze():
         return f"System Error: {str(e)}"
 
                 forensic_box = f"""
-<div style="background: #0f172a; border: 1px solid #38bdf8; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-family: monospace;">
+    <div style="background: #0f172a; border: 1px solid #38bdf8; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-family: monospace;">
     <h4 style="color: #38bdf8; margin-top: 0;">🕵️ FORENSIC SPECIFICATIONS</h4>
     <p><strong>Device Source:</strong> Virtual LPU/GPU Environment (Inferred)</p>
     <p><strong>Logical Location:</strong> Latent Diffusion Space</p>
     <p><strong>Sensor Noise:</strong> 0% Physical PRNU (AI Signature)</p>
     <p><strong>Metadata Status:</strong> <span style="color: #ef4444;">STRIPPED / NON-EXISTENT</span></p>
-</div>
-"""
+    </div>
+    """
                 return render_template('result.html', result=forensic_box + ai_reasoning)
 
         elif option == "2":
