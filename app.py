@@ -53,13 +53,13 @@ def analyze():
                 path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(path)
                 
-               img = Image.open(path)
-                if img.mode != 'RGB': img = img.convert('RGB')
-                img.thumbnail((800, 800), Image.Resampling.LANCZOS)
-                img.save(path, format="JPEG", quality=75)
-                
-                with open(path, "rb") as f:
-                    encoded_image = base64.b64encode(f.read()).decode('utf-8')
+           img = Image.open(path)
+            if img.mode != 'RGB': img = img.convert('RGB')
+            img.thumbnail((800, 800), Image.Resampling.LANCZOS)
+            img.save(path, format="JPEG", quality=75)
+            
+            with open(path, "rb") as f:
+                encoded_image = base64.b64encode(f.read()).decode('utf-8')
 
                 prompt = """
                 ACT AS A SENIOR DIGITAL FORENSICS INVESTIGATOR.
