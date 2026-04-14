@@ -45,9 +45,10 @@ def analyze():
                 file.save(path)
                 
                 img = Image.open(path)
-                if img.mode != 'RGB': img = img.convert('RGB')
-                img.thumbnail((800, 800), Image.Resampling.LANCZOS)
-                img.save(path, format="JPEG", quality=75)
+                if img.mode != 'RGB': 
+                    img = img.convert('RGB')
+                img.thumbnail((500, 500), Image.Resampling.LANCZOS)
+                img.save(path, format="JPEG", quality=60)
                 
                 with open(path, "rb") as f:
                     encoded_image = base64.b64encode(f.read()).decode('utf-8')
