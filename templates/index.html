@@ -84,7 +84,7 @@
         function startScan() {
             document.getElementById('scan-overlay').style.display = 'flex';
             const term = document.getElementById('terminal');
-            const msgs = ["> ACCESSING CORE...", "> SCANNING PIXEL NOISE...", "> EXIF: EMPTY", "> PATTERN: AI DETECTED."];
+            const msgs = ["> ACCESSING CORE...", "> SCANNING PIXEL NOISE...", "> EXIF: EMPTY", "> PATTERN: DETECTING THE PATTERN...","> PLEASE WAIT...","> THANK YOU FOR USING..."];
             let i = 0;
             const timer = setInterval(() => { 
                 if(i < msgs.length) { term.innerHTML += `<div>${msgs[i++]}</div>`; } else { clearInterval(timer); }
