@@ -55,13 +55,28 @@ def analyze():
 
                 # Define Prompts
                 if option == "3":
-                    prompt = ''' Analyze this job offer letter for authenticity. Check for signs of scams such as: 
-                                - requests for money or fees,
-                                - suspicious email domains,
-                                - poor grammar or formatting,
-                                - unverifiable company details,
-                                - unrealistic salary or benefits,
-                                - lack of official contact information.
+                    prompt = ''' You are an expert in digital forensics and scam detection. Analyze the following job offer letter carefully and determine if it is genuine or fraudulent. Consider the following factors in your analysis:
+
+                                    1. Sender details:
+                                       - Is the email domain/company address official and verifiable?
+                                       - Are there spelling errors, generic greetings, or suspicious formatting?
+                                    
+                                    2. Content authenticity:
+                                       - Does the letter mention unrealistic salaries, benefits, or guaranteed employment without interviews?
+                                       - Are there urgent deadlines or pressure tactics?
+                                    
+                                    3. Verification of company:
+                                       - Is the company name real and registered?
+                                       - Does the job description match the company’s industry?
+                                    
+                                    4. Red flags:
+                                       - Requests for upfront payment, bank details, or personal information.
+                                       - Use of free email services (e.g., Gmail, Yahoo) instead of corporate domains.
+                                       - Poor grammar, vague role descriptions, or inconsistent logos/branding.
+                                    
+                                    5. Overall judgment:
+                                       - Provide a clear conclusion: “Likely Genuine” or “Likely Scam.”
+                                       - Explain reasoning with evidence from the text.
                                 
                                 Verdict required: REAL or SCAM.'''
                 else:
@@ -70,15 +85,18 @@ def analyze():
                 
                 REQUIRED REPORT FORMAT:
                 1. **VERDICT**: [REAL or AI]
-                2. **GENERATOR IDENTIFICATION**: (Identify if this is Midjourney, DALL-E 3, Stable Diffusion, or Adobe Firefly based on the pixel smoothing and lighting style).
+                2. **GENERATOR IDENTIFICATION**: (Identify if this is Midjourney, DALL-E 3, Stable Diffusion, or Adobe Firefly based on the pixel smoothing and lighting style and stylistic cues ).
                 3. **INFERRED COMPUTATIONAL ENVIRONMENT**: (Explain that the 'Device' is a Cloud GPU Cluster rather than a physical camera).
                 4. **FORENSIC REASONING**:
-                   - **Texture Analysis**: Is it too 'plastic' or 'painterly'?
-                   - **Artifact Check**: Look for warped edges or non-human proportions.
+                   - **Texture Analysis**: Assess whether surfaces appear overly 'plastic,' 'painterly,' or unnaturally smooth.?
+                   - **Artifact Check**: Identify warped edges, inconsistent geometry, or non-human proportions.
                    - **Metadata Logic**: Explain that the 'Location' is a virtual latent space, hence the lack of GPS.
-                5. GENERATOR ID, and REASONING.  Identify the 'Device' as a Cloud GPU cluster if AI.
+                5. **DEVICE IDENTIFICATION**:
+                   - If AI: Conclude 'Cloud GPU Cluster.'
+                   - If REAL: Identify likely smartphone/camera brand (e.g., iPhone, Samsung) based on post-processing style.
+                6. **EVIDENCE SUMMARY**: Provide concise justification for the verdict, citing specific anomalies or authentic features.
                 
-                If the image is REAL, identify the likely smartphone or camera brand (e.g., iPhone/Samsung) based on the post-processing style."""
+                OUTPUT: Deliver a structured forensic report in the above format, with clear, evidence-based reasoning."""
 
                 completion = client.chat.completions.create(
                     model=VISION_MODEL,
