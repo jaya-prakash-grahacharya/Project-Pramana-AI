@@ -109,7 +109,7 @@ def analyze():
                     }],
                     temperature=0.0,
                     top_p=1,
-                    max_tokens=250
+                    max_tokens=500
                 )
                 
                 ai_reasoning = markdown.markdown(completion.choices[0].message.content)
